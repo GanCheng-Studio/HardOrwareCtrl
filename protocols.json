@@ -1,0 +1,46 @@
+{
+  "protocols": [
+    {
+      "id": "gatt_battery",
+      "name": "标准蓝牙 GATT 电量服务 (BAS 0x180F)",
+      "kind": "gatt_battery",
+      "precision": "exact",
+      "note": "绝大多数支持电量的蓝牙 LE 设备（耳机/音箱/鼠标/键盘/手环）均遵循此标准，数值精确。"
+    },
+    {
+      "id": "vendor_protocol",
+      "name": "厂商私有协议 (SPP/RCSP/HID++)",
+      "kind": "vendor_protocol",
+      "precision": "exact",
+      "note": "通过厂商 App 使用的私有通道直接向设备查询电量，精度最高；需要设备固件开放该通道。"
+    },
+    {
+      "id": "hfp_indicators",
+      "name": "经典蓝牙 HFP 电量上报（系统值）",
+      "kind": "hfp",
+      "precision": "coarse",
+      "note": "Windows 设置页显示的就是这条；部分设备只在连接时上报一次，数值可能滞后或不准确。"
+    },
+    {
+      "id": "unknown",
+      "name": "未知协议（仅显示连接状态，无法读取电量）",
+      "kind": "none",
+      "precision": "none",
+      "note": "设备不支持任何可用的电量通道时使用。"
+    }
+  ],
+  "models": [
+    {"brand": "Sony", "model": "WH-1000XM5", "keywords": ["wh-1000xm5", "sony wh-1000xm5"], "protocol": "gatt_battery"},
+    {"brand": "Sony", "model": "WH-1000XM4", "keywords": ["wh-1000xm4"], "protocol": "gatt_battery"},
+    {"brand": "Sony", "model": "WF-1000XM5", "keywords": ["wf-1000xm5"], "protocol": "gatt_battery"},
+    {"brand": "Philips", "model": "TAA3719 系列（3000 系开放式耳机）", "keywords": ["taa3719", "taa3719db", "taa3719bk", "3000 series open-ear"], "protocol": "hfp_indicators", "note": "该型号固件未开放 BLE/GATT 与厂商私有通道，PC 端仅能取 HFP 上报值。"},
+    {"brand": "Philips", "model": "飞利浦蓝牙耳机（通用）", "keywords": ["philips", "飞利浦"], "protocol": "hfp_indicators", "note": "飞利浦官方仅提供手机 App；桌面端无同等厂商接口。"},
+    {"brand": "Huawei", "model": "FreeBuds Pro 3", "keywords": ["freebuds pro 3"], "protocol": "gatt_battery"},
+    {"brand": "Huawei", "model": "FreeBuds 5", "keywords": ["freebuds 5"], "protocol": "gatt_battery"},
+    {"brand": "Xiaomi", "model": "Buds 4 Pro", "keywords": ["buds 4 pro", "redmi buds"], "protocol": "gatt_battery"},
+    {"brand": "Apple", "model": "AirPods 系列", "keywords": ["airpods"], "protocol": "unknown", "note": "AirPods 不暴露标准 GATT 电量服务，Windows 下通常无法读取。"},
+    {"brand": "JBL", "model": "Tune 系列", "keywords": ["jbl tune"], "protocol": "gatt_battery"},
+    {"brand": "Logitech", "model": "蓝牙鼠标（MX 等蓝牙直连款）", "keywords": ["mx anywhere", "mx master"], "protocol": "gatt_battery", "note": "优联 2.4G 接收器连接时需厂商私有协议（HID++），暂未实现。"},
+    {"brand": "Edifier", "model": "漫步者 LolliPods 等", "keywords": ["lolli", "edifier"], "protocol": "gatt_battery"}
+  ]
+}
